@@ -1,0 +1,27 @@
+@font-face{
+    
+    font-family: myFont;
+    src: url(dpcomic.ttf);
+    
+}
+
+
+#text{
+    
+    position: absolute;
+    font-family: myFont;
+    top: 50px;
+    left: 644px;
+    font-size: 40px;
+    
+}
+
+#text2{
+    
+    position: absolute;
+    font-family: myFont;
+    top: 455;
+    left: 830;
+    font-size: 100px;
+    
+}

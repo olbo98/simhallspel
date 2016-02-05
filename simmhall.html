@@ -1,0 +1,113 @@
+<html>
+    <head>
+        
+        
+        
+    </head>
+    
+    <body onkeydown="keyDown(event)">
+        
+        <link rel="stylesheet" href="styleSimhall.css">
+        
+        <div id="text">POÄNG: 0</div>
+        <div id="text2"></div>
+        
+        <canvas id="myCanvas" width="1440" height="896" onmousedown="onMouseDown(event)" style="border: 1px solid; background-image: url(basan.jpg); background-size: cover; background-position: center;"></canvas>
+        
+        <img id="baseng" src="basan.jpg" style="display: none;">
+        <img id="smutsig" src="smutsigtbarn.jpg" style="display: none;">
+        <img id="ren" src="rentbarn.jpg" style="display: none">
+        
+        <script src="simmhall.js"></script>
+        
+        <script>
+            
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            
+            var antal = 4;
+            
+            var img = document.getElementById("ren");
+            var img2 = document.getElementById("smutsig");
+            
+            var kid = [new barn(img, 1), new barn(img, 1), new barn(img, 1), new barn(img, 1), new barn(img2, 0)];
+            
+            var points = 0;
+            
+            
+            window.setInterval(update, 20);
+            
+            function update(){
+                
+                //ctx.clearRect(0, 0, 1440, 896);
+    
+            }
+            
+        function paint(){
+            
+            for(i = 0; i < kid.length; i++){
+                
+                kid[i].spawn();
+                kid[i].paint(ctx);
+                console.log(kid[i].x);
+                
+            }
+            
+        }
+            
+        function onMouseDown(event){
+            
+            var coordinatesX = event.clientX;
+            var coordinatesY = event.clientY;
+            
+            if((coordinatesX > kid[4].x) && (coordinatesX < (kid[4].x + 100)) && (coordinatesY > kid[4].y) && (coordinatesY < (kid[4].y + 100))){
+                
+                points ++
+                
+                document.getElementById("text").innerHTML = "POÄNG: " + points
+                
+                ctx.clearRect(0, 0, 1440, 896);
+                
+                round();
+                
+            }
+            
+        }
+            
+            function keyDown(event){
+                
+                if (event.keyCode == 13){
+                    
+                    kid.push(new barn(img, 1))
+                    
+                    antal ++;
+                    
+                    ctx.clearRect(0, 0, 1440, 896);
+                    
+                    document.getElementById("text2").innerHTML = "";
+                    
+                    paint();
+                    
+                }
+                
+            }
+            
+            function round(){
+                
+                ctx.clearRect(0, 0, 1440, 896);
+                ctx.drawImage(img, 600, 400, 200, 200);
+                document.getElementById("text2").innerHTML = ": " + antal + "st"
+                
+            }
+            
+            function move(){
+                
+                
+                
+            }
+            
+            
+            
+        </script>
+        </body>
+</html>
