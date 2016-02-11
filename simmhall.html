@@ -26,35 +26,39 @@
             var ctx = canvas.getContext("2d");
             
             var antal = 4;
+            var rundor = 0;
             
             var img = document.getElementById("ren");
             var img2 = document.getElementById("smutsig");
             
-            var kid = [new barn(img, 1), new barn(img, 1), new barn(img, 1), new barn(img, 1), new barn(img2, 0)];
+            //skapar barn
+            var kid = [new Barn(img, 1), new Barn(img, 1), new Barn(img, 1), new Barn(img, 1), new Barn(img2, 0)];
             
             var points = 0;
             
-            
-            window.setInterval(update, 20);
-            
-            function update(){
-                
-                //ctx.clearRect(0, 0, 1440, 896);
-    
-            }
-            
+            //Målar barnen
         function paint(){
             
             for(i = 0; i < kid.length; i++){
                 
-                kid[i].spawn();
                 kid[i].paint(ctx);
-                console.log(kid[i].x);
                 
             }
             
         }
             
+        function spawn(){
+            
+            for(i = 0; i < kid.length; i++){
+                
+                kid[i].spawn();
+                
+            }
+            
+        }
+    
+            
+            //Ser om man klickar på det smutsiga barnet
         function onMouseDown(event){
             
             var coordinatesX = event.clientX;
@@ -78,7 +82,7 @@
                 
                 if (event.keyCode == 13){
                     
-                    kid.push(new barn(img, 1))
+                    kid.push(new Barn(img, 1))
                     
                     antal ++;
                     
@@ -86,7 +90,9 @@
                     
                     document.getElementById("text2").innerHTML = "";
                     
+                    spawn();
                     paint();
+                    
                     
                 }
                 
@@ -97,14 +103,11 @@
                 ctx.clearRect(0, 0, 1440, 896);
                 ctx.drawImage(img, 600, 400, 200, 200);
                 document.getElementById("text2").innerHTML = ": " + antal + "st"
+                rundor ++
                 
             }
             
-            function move(){
-                
-                
-                
-            }
+            
             
             
             
