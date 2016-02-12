@@ -32,14 +32,22 @@
             var img2 = document.getElementById("smutsig");
             
             //skapar barn
-            var kid = [new Barn(img, 1), new Barn(img, 1), new Barn(img, 1), new Barn(img, 1), new Barn(img2, 0)];
+            var kid = [new Barn(img), new Barn(img), new Barn(img), new Barn(img), new Barn(img2)];
             
             var points = 0;
+            
+            var update;
+        
             
             //Målar barnen
         function paint(){
             
+            ctx.clearRect(0, 0, 1440, 896);
+            
             for(i = 0; i < kid.length; i++){
+                
+                kid[i].x = kid[i].x + kid[i].vx;
+                kid[i].y = kid[i].y + kid[i].vy;
                 
                 kid[i].paint(ctx);
                 
@@ -47,6 +55,7 @@
             
         }
             
+            //ger nya koordinater till barnen
         function spawn(){
             
             for(i = 0; i < kid.length; i++){
@@ -56,6 +65,17 @@
             }
             
         }
+            
+            function move(){
+                
+                for(i = 0; i < kid.length; i++){
+                    
+                    //dis ting took liek a whol lessön
+                    kid[i].move();
+                    
+                }
+                
+            }
     
             
             //Ser om man klickar på det smutsiga barnet
@@ -64,6 +84,7 @@
             var coordinatesX = event.clientX;
             var coordinatesY = event.clientY;
             
+            //koordinater för klickruta
             if((coordinatesX > kid[4].x) && (coordinatesX < (kid[4].x + 100)) && (coordinatesY > kid[4].y) && (coordinatesY < (kid[4].y + 100))){
                 
                 points ++
@@ -79,22 +100,34 @@
         }
             
             function keyDown(event){
-                
+                //När man trycker på enter
                 if (event.keyCode == 13){
                     
+                    //Lägger in ett nytt barn i kid arrayen
                     kid.push(new Barn(img, 1))
                     
+                    move();
+                    
+                    //ökar antal med ett
                     antal ++;
                     
                     ctx.clearRect(0, 0, 1440, 896);
                     
                     document.getElementById("text2").innerHTML = "";
                     
+                    //Kallar på spawn och paint
                     spawn();
                     paint();
                     
                     
                 }
+                
+                if(rundor == 5){
+                    
+                    update = window.setInterval(paint, 20);
+                    
+                }
+                
                 
             }
             
@@ -106,6 +139,8 @@
                 rundor ++
                 
             }
+            
+        
             
             
             
