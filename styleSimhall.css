@@ -25,3 +25,13 @@
     font-size: 100px;
     
 }
+
+#tid {
+    
+    position: absolute;
+    font-family: myFont;
+    top: 100px;
+    left: 644px;
+    font-size: 50px;
+    
+}

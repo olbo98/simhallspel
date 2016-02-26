@@ -11,6 +11,7 @@
         
         <div id="text">POÄNG: 0</div>
         <div id="text2"></div>
+        <div id="tid">Tid: 10</div>
         
         <canvas id="myCanvas" width="1440" height="896" onmousedown="onMouseDown(event)" style="border: 1px solid; background-image: url(basan.jpg); background-size: cover; background-position: center;"></canvas>
         
@@ -25,8 +26,10 @@
             var canvas = document.getElementById("myCanvas");
             var ctx = canvas.getContext("2d");
             
-            var antal = 4;
+            var antal = 5;
             var rundor = 0;
+            var tryck = 0;
+            var sekunder = 10;
             
             var img = document.getElementById("ren");
             var img2 = document.getElementById("smutsig");
@@ -36,111 +39,9 @@
             
             var points = 0;
             
-            var update;
-        
+            var PAC;
             
-            //Målar barnen
-        function paint(){
-            
-            ctx.clearRect(0, 0, 1440, 896);
-            
-            for(i = 0; i < kid.length; i++){
-                
-                kid[i].x = kid[i].x + kid[i].vx;
-                kid[i].y = kid[i].y + kid[i].vy;
-                
-                kid[i].paint(ctx);
-                
-            }
-            
-        }
-            
-            //ger nya koordinater till barnen
-        function spawn(){
-            
-            for(i = 0; i < kid.length; i++){
-                
-                kid[i].spawn();
-                
-            }
-            
-        }
-            
-            function move(){
-                
-                for(i = 0; i < kid.length; i++){
-                    
-                    //dis ting took liek a whol lessön
-                    kid[i].move();
-                    
-                }
-                
-            }
-    
-            
-            //Ser om man klickar på det smutsiga barnet
-        function onMouseDown(event){
-            
-            var coordinatesX = event.clientX;
-            var coordinatesY = event.clientY;
-            
-            //koordinater för klickruta
-            if((coordinatesX > kid[4].x) && (coordinatesX < (kid[4].x + 100)) && (coordinatesY > kid[4].y) && (coordinatesY < (kid[4].y + 100))){
-                
-                points ++
-                
-                document.getElementById("text").innerHTML = "POÄNG: " + points
-                
-                ctx.clearRect(0, 0, 1440, 896);
-                
-                round();
-                
-            }
-            
-        }
-            
-            function keyDown(event){
-                //När man trycker på enter
-                if (event.keyCode == 13){
-                    
-                    //Lägger in ett nytt barn i kid arrayen
-                    kid.push(new Barn(img, 1))
-                    
-                    move();
-                    
-                    //ökar antal med ett
-                    antal ++;
-                    
-                    ctx.clearRect(0, 0, 1440, 896);
-                    
-                    document.getElementById("text2").innerHTML = "";
-                    
-                    //Kallar på spawn och paint
-                    spawn();
-                    paint();
-                    
-                    
-                }
-                
-                if(rundor == 5){
-                    
-                    update = window.setInterval(paint, 20);
-                    
-                }
-                
-                
-            }
-            
-            function round(){
-                
-                ctx.clearRect(0, 0, 1440, 896);
-                ctx.drawImage(img, 600, 400, 200, 200);
-                document.getElementById("text2").innerHTML = ": " + antal + "st"
-                rundor ++
-                
-            }
-            
-        
+            var game;
             
             
             
