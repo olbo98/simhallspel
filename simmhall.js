@@ -98,12 +98,12 @@ Barn.prototype.collision = function(){
             
             //Ser om man klickar på det smutsiga barnet
         function onMouseDown(event){
-            //koordinaterna för muspekaren
+            
             var coordinatesX = event.clientX;
             var coordinatesY = event.clientY;
             
             //koordinater för klickruta
-            if((coordinatesX > kid[4].x) && (coordinatesX < (kid[4].x + 100)) && (coordinatesY > kid[4].y) && (coordinatesY < (kid[4].y + 100))){
+            if((coordinatesX > kid[0].x) && (coordinatesX < (kid[0].x + 100)) && (coordinatesY > kid[0].y) && (coordinatesY < (kid[0].y + 100))){
                 
                 window.clearInterval(update);
                 
@@ -119,9 +119,31 @@ Barn.prototype.collision = function(){
                 
                 round();
                 
+            } else {
+                
+                sekunder = sekunder - 2
+                
             }
             
         }
+
+            function rentBarnClick(event){
+                
+                var coordinatesX = event.clientX;
+                var coordinatesY = event.clientY;
+                
+                for(i = 1; i < kid.length; i++){
+                    
+                    if((coordinatesX > kid[i].x) && (coordinatesX < kid[i].x + 100) && (coordinatesY > kid[i].y) && (coordinatesY < kid[i].y + 100)){
+                        
+                        sekunder = sekunder - 3;
+                        
+                    }
+                    
+                }
+                
+            }
+            
             
             function keyDown(event){
                 //När man trycker på enter
@@ -129,12 +151,14 @@ Barn.prototype.collision = function(){
                     
                     tryck = 1;
                     
+                    console.log(tryck);
+                    
                     //Lägger in ett nytt barn i kid arrayen
                     kid.push(new Barn(img, 1))
                     
                     move();
                     
-                    game = window.setInterval(update, 1000);
+                    game = window.setInterval(update, 500);
                     
                     //ökar antal med ett
                     antal++;
@@ -147,15 +171,13 @@ Barn.prototype.collision = function(){
                     spawn();
                     paint();
                     
-                    
-                }
-                
-                if(rundor > 4){
+                    if(rundor > 4){
                     
                     PAC = window.setInterval(paintAndCollision, 20);
                     
+                    }
+                    
                 }
-                
                 
             }
             
