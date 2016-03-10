@@ -5,13 +5,15 @@
         
     </head>
     
-    <body onkeydown="keyDown(event)">
+    <body>
         
         <link rel="stylesheet" href="styleSimhall.css">
         
-        <div id="text">POÄNG: 0</div>
-        <div id="text2"></div>
-        <div id="tid">Tid: 10</div>
+        <div id="poang"></div>
+        <div id="renaBarnAntal"></div>
+        <div id="startKnapp" onmousedown="mouseDownDiv(event)">START</div>
+        <div id="nastaRunda" onmousedown="mouseDownDiv(event)"></div>
+        <div id="tid"></div>
         
         <canvas id="myCanvas" width="1440" height="896" onmousedown="onMouseDown(event), rentBarnClick(event)" style="border: 1px solid; background-image: url(basan.jpg); background-size: cover; background-position: center;"></canvas>
         
@@ -42,7 +44,6 @@
             var PAC;
             
             var game;
-            
             
             
             

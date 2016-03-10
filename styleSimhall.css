@@ -5,8 +5,16 @@
     
 }
 
+canvas{
+    
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    
+}
 
-#text{
+
+#poang{
     
     position: absolute;
     font-family: myFont;
@@ -16,12 +24,12 @@
     
 }
 
-#text2{
+#renaBarnAntal{
     
     position: absolute;
     font-family: myFont;
-    top: 455;
-    left: 830;
+    top: 455px;
+    left: 830px;
     font-size: 100px;
     
 }
@@ -33,5 +41,44 @@
     top: 100px;
     left: 644px;
     font-size: 50px;
+    
+}
+
+#startKnapp{
+    
+    position: absolute;
+    font-family: myFont;
+    top: 448px;
+    left: 644px;
+    font-size: 70px;
+    color: black;
+    
+}
+
+#startKnapp:hover{
+    
+    color: Yellow;
+    
+}
+
+#nastaRunda{
+    
+    position: absolute;
+    font-family: myFont;
+    font-size: 70px;
+    top: 710px;
+    left: 550px;
+    color: black;
+    
+}
+
+#nastaRunda:hover{
+    
+    color: yellow;
+    
+}
+body{
+    
+    cursor: url('123321%20(kopia).png') 23 16, auto;
     
 }

@@ -8,7 +8,7 @@ function Barn(img) {
 
 };
 
-
+//Ger alla barn slumpmässiga x och y värden
 Barn.prototype.spawn = function () {
 
     this.x = Math.random() * (1000 - 300) + 300;
@@ -16,20 +16,20 @@ Barn.prototype.spawn = function () {
 
 
 };
-
+//Målar bilden som barnen skall ha
 Barn.prototype.paint = function (ctx) {
 
     ctx.drawImage(this.img, this.x, this.y, 100, 100);
 
 };
-
+//Ger barnen slumpmässiga hastigheter i x och y led
 Barn.prototype.move = function(){
     
     this.vx = Math.random() * (10 + 10) - 10;
     this.vy = Math.random() * (10 + 10) - 10;
     
 };
-
+//Gör så att barnen inte åker utanför polen
 Barn.prototype.collision = function(){
     
     if(this.x > 1000){
@@ -113,15 +113,11 @@ Barn.prototype.collision = function(){
                 
                 points ++
                 
-                document.getElementById("text").innerHTML = "POÄNG: " + points
+                document.getElementById("poang").innerHTML = "POÄNG: " + points
                 
                 sekunder = sekunder + 5;
                 
                 round();
-                
-            } else {
-                
-                sekunder = sekunder - 2
                 
             }
             
@@ -138,6 +134,8 @@ Barn.prototype.collision = function(){
                         
                         sekunder = sekunder - 3;
                         
+                        
+                        
                     }
                     
                 }
@@ -145,13 +143,17 @@ Barn.prototype.collision = function(){
             }
             
             
-            function keyDown(event){
-                //När man trycker på enter
-                if ((event.keyCode == 13) && (tryck == 0)){
+            function mouseDownDiv(event){
+                    
+                    document.getElementById("startKnapp").innerHTML = "";
+                
+                    document.getElementById("nastaRunda").innerHTML = "";
+                
+                    document.getElementById("poang").innerHTML = "POÄNG: " + points;
+                
+                    document.getElementById("tid").innerHTML = "Tid: " + sekunder;
                     
                     tryck = 1;
-                    
-                    console.log(tryck);
                     
                     //Lägger in ett nytt barn i kid arrayen
                     kid.push(new Barn(img, 1))
@@ -165,7 +167,7 @@ Barn.prototype.collision = function(){
                     
                     ctx.clearRect(0, 0, 1440, 896);
                     
-                    document.getElementById("text2").innerHTML = "";
+                    document.getElementById("renaBarnAntal").innerHTML = "";
                     
                     //Kallar på spawn och paint
                     spawn();
@@ -179,30 +181,32 @@ Barn.prototype.collision = function(){
                     
                 }
                 
-            }
+            
             
             //visar hur många barn som är rena efter varje runda
             function round(){
     
                 ctx.clearRect(0, 0, 1440, 896);
                 ctx.drawImage(img, 600, 400, 200, 200);
-                document.getElementById("text2").innerHTML = ": " + antal + "st"
+                document.getElementById("renaBarnAntal").innerHTML = ": " + antal + "st"
                 rundor++
                 
                 tryck = 0;
                 
                 window.clearInterval(game);
                 
-                textChange();
+                document.getElementById("tid").innerHTML = "Tid: " + sekunder;
+                
+                document.getElementById("nastaRunda").innerHTML = "Nästa runda"
                 
             }
-            
+            //
             function collision(){
                 
                 for(i = 0; i < kid.length; i++){
                     
                     kid[i].collision();
-                    
+                     
                 }
                 
             }
@@ -213,7 +217,7 @@ Barn.prototype.collision = function(){
                 collision();
                 
             }
-            
+            //Timer
             function timer(){
                 
                 sekunder--
@@ -221,19 +225,21 @@ Barn.prototype.collision = function(){
                 tid.innerHTML = "Tid: " + sekunder
                 
             }
-
-            function textChange(){
-                
-                var tid = document.getElementById("tid");
-                tid.innerHTML = "Tid: " + sekunder
-                
-            }
             
+            //Återställer spelet när tiden är slut
             function gameOver(){
                 
-                if(sekunder == 0){
+                if(sekunder <= 0){
                     
+                    tryck = 0;
+                    sekunder = 10;
+                    
+                    kid = [new Barn(img2), new Barn(img), new Barn(img), new Barn(img), new Barn(img)];
                     window.clearInterval(game);
+                    window.clearInterval(PAC);
+                    
+                    var tid = document.getElementById("tid");
+                    tid.innerHTML = "Tid: 0"
                     ctx.clearRect(0, 0, 1440, 896);
                     
                 }
