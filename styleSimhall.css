@@ -1,23 +1,15 @@
-@font-face{
+/*@font-face{
     
     font-family: myFont;
     src: url(dpcomic.ttf);
     
-}
-
-canvas{
-    
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
-    
-}
+}*/
 
 
 #poang{
     
     position: absolute;
-    font-family: myFont;
+    font-family: Krungthep;
     top: 50px;
     left: 644px;
     font-size: 40px;
@@ -27,7 +19,7 @@ canvas{
 #renaBarnAntal{
     
     position: absolute;
-    font-family: myFont;
+    font-family: Krungthep;
     top: 455px;
     left: 830px;
     font-size: 100px;
@@ -37,7 +29,7 @@ canvas{
 #tid {
     
     position: absolute;
-    font-family: myFont;
+    font-family: Krungthep;
     top: 100px;
     left: 644px;
     font-size: 50px;
@@ -47,7 +39,7 @@ canvas{
 #startKnapp{
     
     position: absolute;
-    font-family: myFont;
+    font-family: Krungthep;
     top: 448px;
     left: 644px;
     font-size: 70px;
@@ -64,7 +56,7 @@ canvas{
 #nastaRunda{
     
     position: absolute;
-    font-family: myFont;
+    font-family: Krungthep;
     font-size: 70px;
     top: 710px;
     left: 550px;

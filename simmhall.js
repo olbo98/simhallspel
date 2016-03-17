@@ -62,6 +62,8 @@ Barn.prototype.collision = function(){
             
             ctx.clearRect(0, 0, 1440, 896);
             
+            console.log("sudda");
+            
             for(i = 0; i < kid.length; i++){
                 
                 kid[i].x = kid[i].x + kid[i].vx;
@@ -102,6 +104,8 @@ Barn.prototype.collision = function(){
             var coordinatesX = event.clientX;
             var coordinatesY = event.clientY;
             
+            text();
+            
             //koordinater för klickruta
             if((coordinatesX > kid[0].x) && (coordinatesX < (kid[0].x + 100)) && (coordinatesY > kid[0].y) && (coordinatesY < (kid[0].y + 100))){
                 
@@ -110,6 +114,8 @@ Barn.prototype.collision = function(){
                 window.clearInterval(PAC)
                 
                 ctx.clearRect(0, 0, 1440, 896);
+                
+                console.log("sudda2");
                 
                 points ++
                 
@@ -132,9 +138,8 @@ Barn.prototype.collision = function(){
                     
                     if((coordinatesX > kid[i].x) && (coordinatesX < kid[i].x + 100) && (coordinatesY > kid[i].y) && (coordinatesY < kid[i].y + 100)){
                         
-                        sekunder = sekunder - 3;
-                        
-                        
+                        sekunder = sekunder - 5;
+                        //fadeOut = window.setInterval(textFadeOut("-5"), 50);
                         
                     }
                     
@@ -167,6 +172,7 @@ Barn.prototype.collision = function(){
                     
                     ctx.clearRect(0, 0, 1440, 896);
                     
+                    console.log("sudda3");
                     document.getElementById("renaBarnAntal").innerHTML = "";
                     
                     //Kallar på spawn och paint
@@ -194,7 +200,7 @@ Barn.prototype.collision = function(){
                 tryck = 0;
                 
                 window.clearInterval(game);
-                
+                console.log("sudda4");
                 document.getElementById("tid").innerHTML = "Tid: " + sekunder;
                 
                 document.getElementById("nastaRunda").innerHTML = "Nästa runda"
@@ -241,6 +247,7 @@ Barn.prototype.collision = function(){
                     var tid = document.getElementById("tid");
                     tid.innerHTML = "Tid: 0"
                     ctx.clearRect(0, 0, 1440, 896);
+                    console.log("sudda5");
                     
                 }
                 
@@ -252,3 +259,18 @@ Barn.prototype.collision = function(){
                 gameOver();
                 
             }
+
+            /*function textFadeOut(text){
+                 
+                    ctx.fillStyle = "rgba(255, 0, 0, 1)";
+                    ctx.font = "50px Krungthep";
+                    ctx.fillText = (text, 0, 0);
+                    alpha = alpha - 0.05;
+                
+                    if(alpha < 0){
+                    
+                        window.clearInterval(fadeOut);
+                    
+                    }
+                
+            }*/

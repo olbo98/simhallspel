@@ -15,7 +15,7 @@
         <div id="nastaRunda" onmousedown="mouseDownDiv(event)"></div>
         <div id="tid"></div>
         
-        <canvas id="myCanvas" width="1440" height="896" onmousedown="onMouseDown(event), rentBarnClick(event)" style="border: 1px solid; background-image: url(basan.jpg); background-size: cover; background-position: center;"></canvas>
+        <canvas id="myCanvas" width="1440" height="896" onmousedown="onMouseDown(event), rentBarnClick(event)" style="border: 1px solid;background-image: url(basan.jpg); background-size: cover; background-position: center;"></canvas>
         
         <img id="baseng" src="basan.jpg" style="display: none;">
         <img id="smutsig" src="smutsigtbarn.jpg" style="display: none;">
@@ -45,7 +45,19 @@
             
             var game;
             
+            var fadeOut;
             
+            var alpha = 1.0;
+            
+             function text(){
+                
+                ctx.fillStyle = "rgba(255, 0, 0, 1)";
+                ctx.font = "30px Arial";
+                ctx.fillText("Hello World",10,50);
+                
+                console.log(1);
+                
+             };
             
             
         </script>
