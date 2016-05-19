@@ -101,7 +101,7 @@ Barn.prototype.collision = function(){
             
             var coordinatesX = event.clientX;
             var coordinatesY = event.clientY;
-            
+            console.log("hej");
             //Ser om man klickar på det smutsiga barnet
             if((coordinatesX > kid[0].x) && (coordinatesX < (kid[0].x + 100)) && (coordinatesY > kid[0].y) && (coordinatesY < (kid[0].y + 100))){
                 
@@ -172,6 +172,9 @@ Barn.prototype.collision = function(){
             
             function mouseDownDiv(event){
                     
+                    console.log(kid[0].x);
+                    console.log(kid[0].y);
+                
                     menuClick.play();
                 
                     simmhallSound.loop = true;
@@ -396,6 +399,13 @@ Barn.prototype.collision = function(){
                 ctx.drawImage(pinboard, 200, 10, 1000, 700);
                 ctx.drawImage(smutsig, 270, 90, 300, 300);
                 ctx.drawImage(ren, 270, 320, 300, 300);
+                
+            };
+
+            function click(event){
+                
+                onMouseDown(event);
+                rentBarnClick(event);
                 
             };
 
