@@ -1,11 +1,3 @@
-/*@font-face{
-    
-    font-family: myFont;
-    src: url(dpcomic.ttf);
-    
-}*/
-
-
 #poang{
     
     position: absolute;
@@ -21,7 +13,7 @@
     position: absolute;
     font-family: Krungthep;
     top: 455px;
-    left: 830px;
+    left: 720px;
     font-size: 100px;
     
 }
@@ -40,7 +32,7 @@
     
     position: absolute;
     font-family: Krungthep;
-    top: 448px;
+    top: 488px;
     left: 644px;
     font-size: 70px;
     color: black;
@@ -53,13 +45,96 @@
     
 }
 
+#instruktioner{
+    
+    position: absolute;
+    font-family: Krungthep;
+    top: 638;
+    left: 554;
+    font-size: 50px;
+    color: black;
+    
+}
+
+#instruktioner:hover{
+    
+    color: yellow;
+    
+}
+
+#instruktionSmutsig{
+    
+    position: absolute;
+    font-family: Krungthep;
+    top: 170;
+    left: 570;
+    font-size: 30px;
+    color: yellow;
+    
+}
+
+#instruktionSmutsig2{
+    
+    position: absolute;
+    font-family: Krungthep;
+    top: 210;
+    left: 570;
+    font-size: 30px;
+    color: yellow;
+    
+}
+
+#instruktionSmutsig3{
+    
+    position: absolute;
+    font-family: Krungthep;
+    top: 250;
+    left: 570;
+    font-size: 30px;
+    color: yellow;
+    
+}
+
+#instruktionRen{
+    
+    position: absolute;
+    font-family: Krungthep;
+    top: 410;
+    left: 570;
+    font-size: 30px;
+    color: yellow;
+    
+}
+
+#instruktionRen2{
+    
+    position: absolute;
+    font-family: Krungthep;
+    top: 450;
+    left: 570;
+    font-size: 30px;
+    color: yellow;
+    
+}
+
+#instruktionRen3{
+    
+    position: absolute;
+    font-family: Krungthep;
+    top: 490;
+    left: 570;
+    font-size: 30px;
+    color: yellow;
+    
+}
+
 #nastaRunda{
     
     position: absolute;
     font-family: Krungthep;
     font-size: 70px;
     top: 710px;
-    left: 550px;
+    left: 500px;
     color: black;
     
 }
@@ -69,8 +144,44 @@
     color: yellow;
     
 }
+
+#timesUp{
+    
+    position: absolute;
+    font-family: Krungthep;
+    font-size: 70px;
+    top: 260;
+    left: 500;
+    
+}
+
+#tillbaka{
+    
+    position: absolute;
+    font-family: Krungthep;
+    font-size: 70px;
+    top: 680;
+    left: 550;
+    color: black;
+    
+}
+
+#tillbaka:hover{
+    
+    color: yellow;
+    
+}
+
 body{
     
     cursor: url('123321%20(kopia).png') 23 16, auto;
+    
+}
+
+canvas{
+    
+    position: absolute;
+    top: 0;
+    left: 0;
     
 }

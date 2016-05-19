@@ -1,6 +1,6 @@
 <html>
     <head>
-        
+        <meta charset="utf-8">
         
         
     </head>
@@ -9,35 +9,80 @@
         
         <link rel="stylesheet" href="styleSimhall.css">
         
+        <canvas id="myCanvas" width="1440" height="896" onmousedown="onMouseDown(event), rentBarnClick(event)" style="border: 1px solid;background-image: url(basan.jpg); background-size: cover; background-position: center;"></canvas>
+        
+        <canvas id="myCanvas2" width="1440" height="896" onmousedown="onMouseDown(event), rentBarnClick(event)" style="border: 1px solid;"></canvas>
+        
+        <canvas id="dusch" width="1440" height="896" style="border: 1px solid;"></canvas>
+        
         <div id="poang"></div>
         <div id="renaBarnAntal"></div>
         <div id="startKnapp" onmousedown="mouseDownDiv(event)">START</div>
         <div id="nastaRunda" onmousedown="mouseDownDiv(event)"></div>
         <div id="tid"></div>
+        <div id="timesUp"></div>
+        <div id="tillbaka" onmousedown="toStart()"></div>
+        <div id="instruktioner" onmousedown="instructions()">INSTRUKTIONER</div>
+        <div id="instruktionSmutsig"></div>
+        <div id="instruktionSmutsig2"></div>
+        <div id="instruktionSmutsig3"></div>
+        <div id="instruktionRen"></div>
+        <div id="instruktionRen2"></div>
+        <div id="instruktionRen3"></div>
         
-        <canvas id="myCanvas" width="1440" height="896" onmousedown="onMouseDown(event), rentBarnClick(event)" style="border: 1px solid;background-image: url(basan.jpg); background-size: cover; background-position: center;"></canvas>
-        
+        <img id="soapUp" src="123321.png" style="display: none">
         <img id="baseng" src="basan.jpg" style="display: none;">
-        <img id="smutsig" src="smutsigtbarn.jpg" style="display: none;">
-        <img id="ren" src="rentbarn.jpg" style="display: none">
+        <img id="smutsig" src="smutsigtbarn.png" style="display: none;">
+        <img id="ren" src="rentbarn.png" style="display: none">
+        <img id="pinboard" src="pin-board-67130_960_720.jpg" style="display: none;">
         
         <script src="simmhall.js"></script>
         
         <script>
             
+            //Deklarerar och initierar variabler/element
             var canvas = document.getElementById("myCanvas");
             var ctx = canvas.getContext("2d");
             
-            var antal = 5;
+            var canvas2 = document.getElementById("myCanvas2");
+            var ctx2 = canvas2.getContext("2d");
+            
+            var canvasDusch = document.getElementById("dusch");
+            var ctxDusch = canvasDusch.getContext("3d");
+            
+            var tid = document.getElementById("tid");
+            var poang = document.getElementById("poang");
+            var tillbaka = document.getElementById("tillbaka");
+            var timesUp = document.getElementById("timesUp");
+            var startKnapp = document.getElementById("startKnapp");
+            
+            var instruktioner = document.getElementById("instruktioner");
+            var instruktionSmutsig = document.getElementById("instruktionSmutsig");
+            var instruktionSmutsig2 = document.getElementById("instruktionSmutsig2");
+            var instruktionSmutsig3 = document.getElementById("instruktionSmutsig3");
+            
+            var instruktionRen = document.getElementById("instruktionRen");
+            var instruktionRen2 = document.getElementById("instruktionRen2");
+            var instruktionRen3 = document.getElementById("instruktionRen3");
+            
+            var antal = 4;
             var rundor = 0;
             var tryck = 0;
             var sekunder = 10;
             
-            var img = document.getElementById("ren");
-            var img2 = document.getElementById("smutsig");
+            var ren = document.getElementById("ren");
+            var smutsig = document.getElementById("smutsig");
+            var pinboard = document.getElementById("pinboard");
+            var soapUp = document.getElementById("soapUp");
             
-            //skapar barn
-            var kid = [new Barn(img2), new Barn(img), new Barn(img), new Barn(img), new Barn(img)];
+            ctx.drawImage(soapUp, 270, -100, 800, 600);
+            //ljud objekt
+            var simmhallSound = new Audio("Children Playing-SoundBible.com-591301488.mp3");
+            var smutsigClick = new Audio("Woah_male-Sound_Explorer-752136879 (1).mp3");
+            var menuClick = new Audio("Tick-DeepFrozenApps-397275646.mp3");
+            
+            //skapar barn objekten
+            var kid = [new Barn(smutsig), new Barn(ren), new Barn(ren), new Barn(ren), new Barn(ren)];
             
             var points = 0;
             
@@ -45,21 +90,9 @@
             
             var game;
             
-            var fadeOut;
-            
-            var alpha = 1.0;
-            
-             function text(){
-                
-                ctx.fillStyle = "rgba(255, 0, 0, 1)";
-                ctx.font = "30px Arial";
-                ctx.fillText("Hello World",10,50);
-                
-                console.log(1);
-                
-             };
-            
+            var opacitetInterval;
             
         </script>
+        
         </body>
 </html>

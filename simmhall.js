@@ -8,7 +8,7 @@ function Barn(img) {
 
 };
 
-//Ger alla barn slumpmässiga x och y värden
+//Ger alla barn slumpmässiga x och y värden mellan 1000 och 300
 Barn.prototype.spawn = function () {
 
     this.x = Math.random() * (1000 - 300) + 300;
@@ -22,7 +22,7 @@ Barn.prototype.paint = function (ctx) {
     ctx.drawImage(this.img, this.x, this.y, 100, 100);
 
 };
-//Ger barnen slumpmässiga hastigheter i x och y led
+//Ger barnen slumpmässiga hastigheter i x och y led mellan 10 och -10
 Barn.prototype.move = function(){
     
     this.vx = Math.random() * (10 + 10) - 10;
@@ -57,12 +57,10 @@ Barn.prototype.collision = function(){
     
 };
 
-            //Målar barnen
+            //Målar barnen och lägger till hastigheten till x-värdet
         function paint(){
             
             ctx.clearRect(0, 0, 1440, 896);
-            
-            console.log("sudda");
             
             for(i = 0; i < kid.length; i++){
                 
@@ -71,9 +69,9 @@ Barn.prototype.collision = function(){
                 
                 kid[i].paint(ctx);
                 
-            }
+            };
             
-        }
+        };
             
             //ger nya koordinater till barnen
         function spawn(){
@@ -82,52 +80,76 @@ Barn.prototype.collision = function(){
                 
                 kid[i].spawn();
                 
-            }
+            };
             
-        }
-            
+        };
+            //Gör så att varje barn börjar röra sig
             function move(){
                 
                 for(i = 0; i < kid.length; i++){
                     
-                    //dis ting took liek a whol lessön
+                        
                     kid[i].move();
                     
-                }
+                };
                 
-            }
+            };
     
             
-            //Ser om man klickar på det smutsiga barnet
+            
         function onMouseDown(event){
             
             var coordinatesX = event.clientX;
             var coordinatesY = event.clientY;
             
-            text();
-            
-            //koordinater för klickruta
+            //Ser om man klickar på det smutsiga barnet
             if((coordinatesX > kid[0].x) && (coordinatesX < (kid[0].x + 100)) && (coordinatesY > kid[0].y) && (coordinatesY < (kid[0].y + 100))){
                 
-                window.clearInterval(update);
+                smutsigClick.play();
+                
+                //window.clearInterval(update);
                 
                 window.clearInterval(PAC)
                 
                 ctx.clearRect(0, 0, 1440, 896);
                 
-                console.log("sudda2");
-                
                 points ++
                 
-                document.getElementById("poang").innerHTML = "POÄNG: " + points
+                //Återställer spelet när du vinner
+                if(points == 20){
+                    
+                    sekunder = 10;
+                    
+                    kid = [new Barn(smutsig), new Barn(ren), new Barn(ren), new Barn(ren), new Barn(ren)];
+                    //Pausar spelet
+                    window.clearInterval(game);
+                    window.clearInterval(PAC);
+                    
+                    ctx.clearRect(0, 0, 1440, 896);
+                    ctx2.clearRect(0, 0, 1440, 896);
+                    
+                    tid.innerHTML = "";
+                    timesUp.innerHTML = "DU HAR VUNNIT!";
+                    tillbaka.innerHTML = "Till menyn";
+                    poang.innerHTML = "POÄNG: " + points;
+                    
+                    poang.style.top = 460;
+                    poang.style.left = 580;
+                    poang.style.fontSize = 70;
+                    
+                }else{
+                
+                poang.innerHTML = "POÄNG: " + points
                 
                 sekunder = sekunder + 5;
                 
                 round();
+                    
+                };
                 
-            }
+            };
             
-        }
+        };
 
             function rentBarnClick(event){
                 
@@ -138,30 +160,32 @@ Barn.prototype.collision = function(){
                     
                     if((coordinatesX > kid[i].x) && (coordinatesX < kid[i].x + 100) && (coordinatesY > kid[i].y) && (coordinatesY < kid[i].y + 100)){
                         
+                        textFadeOut("-5", event);
                         sekunder = sekunder - 5;
-                        //fadeOut = window.setInterval(textFadeOut("-5"), 50);
                         
-                    }
+                    };
                     
-                }
+                };
                 
-            }
+            };
             
             
             function mouseDownDiv(event){
                     
-                    document.getElementById("startKnapp").innerHTML = "";
+                    menuClick.play();
+                
+                    simmhallSound.loop = true;
+                    simmhallSound.play();
+                    
+                    startKnapp.innerHTML = "";
+                    
+                    instruktioner.innerHTML = "";
                 
                     document.getElementById("nastaRunda").innerHTML = "";
                 
-                    document.getElementById("poang").innerHTML = "POÄNG: " + points;
+                    poang.innerHTML = "POÄNG: " + points;
                 
-                    document.getElementById("tid").innerHTML = "Tid: " + sekunder;
-                    
-                    tryck = 1;
-                    
-                    //Lägger in ett nytt barn i kid arrayen
-                    kid.push(new Barn(img, 1))
+                    tid.innerHTML = "Tid: " + sekunder;
                     
                     move();
                     
@@ -172,105 +196,226 @@ Barn.prototype.collision = function(){
                     
                     ctx.clearRect(0, 0, 1440, 896);
                     
-                    console.log("sudda3");
                     document.getElementById("renaBarnAntal").innerHTML = "";
                     
                     //Kallar på spawn och paint
                     spawn();
                     paint();
                     
-                    if(rundor > 4){
+                    if(points > 4){
                     
+                    //Detta gör så att barnen får updaterade positioner var 20:e millisekund 
                     PAC = window.setInterval(paintAndCollision, 20);
                     
-                    }
+                    };
                     
-                }
+                };
                 
             
             
             //visar hur många barn som är rena efter varje runda
             function round(){
-    
+                //Skapar ett nytt barn i arrayen
+                kid.push(new Barn(ren))
+                
                 ctx.clearRect(0, 0, 1440, 896);
-                ctx.drawImage(img, 600, 400, 200, 200);
+                ctx.drawImage(ren, 490, 425, 200, 200);
                 document.getElementById("renaBarnAntal").innerHTML = ": " + antal + "st"
                 rundor++
                 
-                tryck = 0;
+                hideKids();
                 
                 window.clearInterval(game);
-                console.log("sudda4");
-                document.getElementById("tid").innerHTML = "Tid: " + sekunder;
+                
+                tid.innerHTML = "Tid: " + sekunder;
                 
                 document.getElementById("nastaRunda").innerHTML = "Nästa runda"
                 
-            }
-            //
+            };
+            //Gör så att varje barn håller sig inanför polområdet
             function collision(){
                 
                 for(i = 0; i < kid.length; i++){
                     
                     kid[i].collision();
                      
-                }
+                };
                 
-            }
+            };
             
             function paintAndCollision(){
                 
                 paint();
                 collision();
                 
-            }
-            //Timer
+            };
+            //Timer som räknar ner
             function timer(){
                 
                 sekunder--
-                var tid = document.getElementById("tid");
                 tid.innerHTML = "Tid: " + sekunder
                 
-            }
+            };
             
             //Återställer spelet när tiden är slut
             function gameOver(){
                 
                 if(sekunder <= 0){
+                    //Pausar ljudet
+                    simmhallSound.pause()
                     
-                    tryck = 0;
+                    antal = 4;
+                    
                     sekunder = 10;
                     
-                    kid = [new Barn(img2), new Barn(img), new Barn(img), new Barn(img), new Barn(img)];
+                    kid = [new Barn(smutsig), new Barn(ren), new Barn(ren), new Barn(ren), new Barn(ren)];
+                    //Stoppar intervaller
                     window.clearInterval(game);
                     window.clearInterval(PAC);
-                    
-                    var tid = document.getElementById("tid");
-                    tid.innerHTML = "Tid: 0"
+                    window.clearInterval(opacitetInterval);
+                    //Suddar canvas1 och canvas2
                     ctx.clearRect(0, 0, 1440, 896);
-                    console.log("sudda5");
+                    ctx2.clearRect(0, 0, 1440, 896);
                     
-                }
+                    tid.innerHTML = "";
+                    timesUp.innerHTML = "Tiden är ute!";
+                    tillbaka.innerHTML = "Till menyn";
+                    //Flyttar poang taggens position
+                    poang.style.top = 460;
+                    poang.style.left = 580;
+                    poang.style.fontSize = 70;
+                    
+                };
                 
-            }
+            };
             
             function update(){
                 
                 timer();
                 gameOver();
                 
-            }
+            };
 
-            /*function textFadeOut(text){
-                 
-                    ctx.fillStyle = "rgba(255, 0, 0, 1)";
-                    ctx.font = "50px Krungthep";
-                    ctx.fillText = (text, 0, 0);
-                    alpha = alpha - 0.05;
+            function textFadeOut(text, event){
                 
-                    if(alpha < 0){
+                var opacitet = 1.0;//Full opacitet
+                var coordinatesX = event.clientX;//x-koordinaterna för muspekaren
+                var coordinatesY = event.clientY;//y-koordinaterna för muspekaren
+                //Skapar ett interval där vi skapar funktionen när vi skapar intervallet
+                opacitetInterval = setInterval(function(){
                     
-                        window.clearInterval(fadeOut);
+                    //suddar vid ett område runt texten som vi skapar nedan
+                    ctx2.clearRect(coordinatesX, coordinatesY - 100, 100, 200);
                     
-                    }
+                    //Minskar opaciteten på texten samtidigt som den flyttas uppåt
+                    ctx2.fillStyle = "rgba(255, 0, 0," + opacitet + ")";
+                    ctx2.font = "50px Arial";
+                    //Skapar text vid muspekaren
+                    ctx2.fillText(text, coordinatesX, coordinatesY);
+                    
+                    opacitet = opacitet - 0.05;//Sänker opaciteten
+                    coordinatesY = coordinatesY - 1;//Flyttar text uppåt
+                    
+                    //Om opaciteten är noll, tag bort intervallet
+                    if(opacitet < 0){
+                        
+                        ctx2.clearRect(0, 0, 1440, 896);
+                        window.clearInterval(opacitetInterval);
+                    
+                    };
+                    
+                }, 50);
                 
-            }*/
+            };
+            
+            //Flyttar barnen utanför canvas så att man inte kan klicka på dem
+            function hideKids(){
+                
+                for(i = 0; i < kid.length; i++){
+                    
+                    kid[i].x = -100;
+                    
+                };
+                
+            };
+            
+            function toStart(){
+                //Spelar click ljudet
+                menuClick.play();
+                
+                points = 0;
+                
+                tillbaka.innerHTML = "";
+                timesUp.innerHTML = "";
+                poang.innerHTML = "";
+                startKnapp.innerHTML = "START";
+                instruktioner.innerHTML = "INSTRUKTIONER"
+                
+                instruktionSmutsig.innerHTML = ""
+                instruktionSmutsig2.innerHTML = ""
+                instruktionSmutsig3.innerHTML = ""
+                
+                instruktionRen.innerHTML = "";
+                instruktionRen2.innerHTML = "";
+                instruktionRen3.innerHTML = "";
+                
+                ctx.clearRect(0, 0, 1440, 896);
+                ctx.drawImage(soapUp, 270, -100, 800, 600);
+                
+                tillbaka.style.left = 550;
+                tillbaka.style.top = 680;
+                
+                poang.style.top = 50;
+                poang.style.left = 644;
+                poang.style.fontSize = 40;
+                
+            };
+
+            function instructions(){
+                
+                menuClick.play();
+                
+                hideKids();
+                
+                startKnapp.innerHTML = "";
+                instruktioner.innerHTML = "";
+                tillbaka.innerHTML = "Till menyn";
+                
+                instruktionSmutsig.innerHTML = "Klicka på det smutsiga barnet för"
+                instruktionSmutsig2.innerHTML = "att få poäng. Du vinner när du har"
+                instruktionSmutsig3.innerHTML = "fått 20 poäng"
+                
+                instruktionRen.innerHTML = "Klickar du på de rena barnen";
+                instruktionRen2.innerHTML = "så förlorar du tid. När tiden";
+                instruktionRen3.innerHTML = "är slut så har du förlorat";
+                
+                //Återställer tillbaka taggens position
+                tillbaka.style.left = 540;
+                tillbaka.style.top = 730;
+                
+                ctx.drawImage(pinboard, 200, 10, 1000, 700);
+                ctx.drawImage(smutsig, 270, 90, 300, 300);
+                ctx.drawImage(ren, 270, 320, 300, 300);
+                
+            };
+
+/*function duschInitiate(event){
+    
+    ctxDusch.drawImage();
+    ctxDusch.drawImage();
+    
+    var coordinatesX = event.clientX;
+    var coordinatesY = event.clientY;
+    
+    var time = getMilliseconds();
+    
+    var positionMouse =;
+    var newPositionMouse =;
+    
+    window.setInterval(function(){
+        
+        
+        
+    }, 20);
+    
+};*/
