@@ -101,7 +101,7 @@ Barn.prototype.collision = function(){
             
             var coordinatesX = event.clientX;
             var coordinatesY = event.clientY;
-            console.log("hej");
+            
             //Ser om man klickar på det smutsiga barnet
             if((coordinatesX > kid[0].x) && (coordinatesX < (kid[0].x + 100)) && (coordinatesY > kid[0].y) && (coordinatesY < (kid[0].y + 100))){
                 
@@ -408,24 +408,3 @@ Barn.prototype.collision = function(){
                 rentBarnClick(event);
                 
             };
-
-/*function duschInitiate(event){
-    
-    ctxDusch.drawImage();
-    ctxDusch.drawImage();
-    
-    var coordinatesX = event.clientX;
-    var coordinatesY = event.clientY;
-    
-    var time = getMilliseconds();
-    
-    var positionMouse =;
-    var newPositionMouse =;
-    
-    window.setInterval(function(){
-        
-        
-        
-    }, 20);
-    
-};*/
